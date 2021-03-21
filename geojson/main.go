@@ -1,74 +1,36 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 
-	geojsonext "github.com/engelsjk/planeta-ext/geojson"
 	"github.com/engelsjk/planeta/geo"
-	"github.com/engelsjk/planeta/geo/geos"
+	"github.com/engelsjk/planeta/geo/geomfn"
 	"github.com/twpayne/go-geom/encoding/geojson"
 )
 
 func main() {
+	b1 := []byte(`{"type": "Feature","properties": {},"geometry": {"type": "Polygon", "coordinates": [[[-83.5345458984375,39.5633531658293], [-82.4139404296875,39.5633531658293], [-82.4139404296875,40.39258071969131], [-83.5345458984375,40.39258071969131], [-83.5345458984375,39.5633531658293]]]}}`)
 
-	s := `{
-		"type": "Feature",
-		"properties": {
-			"name": "example"
-		},
-		"geometry": {
-		  "type": "Polygon",
-		  "coordinates": [
-			[
-			  [
-				-83.023681640625,
-				39.104488809440475
-			  ],
-			  [
-				-81.968994140625,
-				39.104488809440475
-			  ],
-			  [
-				-81.968994140625,
-				39.85072092501597
-			  ],
-			  [
-				-83.023681640625,
-				39.85072092501597
-			  ],
-			  [
-				-83.023681640625,
-				39.104488809440475
-			  ]
-			]
-		  ]
-		}
-	  }`
+	b2 := []byte(`{"type": "Feature","properties": {"name": "example"},"geometry": {"type": "Polygon","coordinates": [[[-83.023681640625,39.104488809440475],[-81.968994140625,39.104488809440475],[-81.968994140625,39.85072092501597],[-83.023681640625,39.85072092501597],[-83.023681640625,39.104488809440475]]]}}`)
 
-	f := &geojson.Feature{}
-	err := json.Unmarshal([]byte(s), f)
-	if err != nil {
-		log.Fatal(err)
-	}
+	var feature1, feature2 geojson.Feature
 
-	fmt.Printf("%+v\n", f.Properties)
+	feature1.UnmarshalJSON(b1)
+	feature2.UnmarshalJSON(b2)
 
-	if name, err := geojsonext.PropertyString(f.Properties, "name"); err == nil {
-		fmt.Printf("name: %s\n", name)
-	} else {
-		log.Fatal(err)
-	}
+	geometry1, _ := geo.MakeGeometryFromGeomT(feature1.Geometry)
+	geometry2, _ := geo.MakeGeometryFromGeomT(feature2.Geometry)
 
-	g, err := geo.MakeGeometryFromGeomT(f.Geometry)
-	if err != nil {
-		log.Fatal(err)
-	}
+	intersects, _ := geomfn.Intersects(geometry1, geometry2)
 
-	if isValid, err := geos.IsValid(g.EWKB()); err == nil {
-		fmt.Printf("isvalid: %t\n", isValid)
-	} else {
-		log.Fatal(err)
-	}
+	fmt.Println(intersects)
+	// true
+
+	intersection, _ := geomfn.Intersection(geometry1, geometry2)
+
+	g, _ := intersection.AsGeomT()
+	b, _ := geojson.Marshal(g)
+
+	fmt.Println(string(b))
+	// {"type":"Polygon","coordinates":[[[-82.4139404296875,39.85072092501597],[-82.4139404296875,39.5633531658293],[-83.023681640625,39.5633531658293],[-83.023681640625,39.85072092501597],[-82.4139404296875,39.85072092501597]]]}
 }
