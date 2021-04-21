@@ -59,8 +59,6 @@ github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25Kn
 github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385/go.mod h1:0vRUJqYpeSZifjYj7uP3BG/gKcuzL9xWVV/Y+cK33KM=
 github.com/engelsjk/planeta v0.0.0-20210320224955-67fbe79abaaa h1:jiii9Q/wguCRbWcpYOGkq2RAIbC8VNkQlxzIVwA63ok=
 github.com/engelsjk/planeta v0.0.0-20210320224955-67fbe79abaaa/go.mod h1:JhFMPPUDQ+rhW93WlP3VzIuuTNVXwC19BA/KkCOIcS4=
-github.com/engelsjk/planeta-ext v0.0.0-20210319205513-f842142a2cfc h1:csbsvZ4pa4p3KZ7ajjqA6X2GCLGSYWuHZaAqGsxJ42Y=
-github.com/engelsjk/planeta-ext v0.0.0-20210319205513-f842142a2cfc/go.mod h1:SVDhN06jiyAaYnNTuK51VlJqzwHz6xB7HBPwegTrOqk=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
