@@ -101,3 +101,5 @@ b, _ = f.MarshalJSON()
 fmt.Println(string(b))
 // {"type":"Feature","geometry":{"type":"Polygon","coordinates":[...]}}
 ```
+
+![](images/buffer.png)
