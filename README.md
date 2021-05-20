@@ -8,13 +8,16 @@ Examples for the package [```engelsjk/planeta```](https://github.com/engelsjk/pl
 geomPolygon, _ := geo.ParseGeometry("POLYGON((-2.0 0.0, 0.0 0.0, 0.0 1.0, -2.0 1.0, -2.0 0.0))")
 geomLineString, _ := geo.ParseGeometry("LINESTRING(-0.5 0.5, 0.5 0.5)")
 
-print(geomfn.Length(geomLineString))
+length, _ := geomfn.Length(geomLineString)
+fmt.Println(length)
 // 1
 
-print(geomfn.Area(geomPolygon))
+area, _ := geomfn.Area(geomPolygon)
+fmt.Println(area)
 // 2
 
-print(geomfn.Intersects(geomPolygon, geomLineString))
+intersects, _ := geomfn.Intersects(geomPolygon, geomLineString)
+fmt.Println(intersects)
 // true
 ```
 
